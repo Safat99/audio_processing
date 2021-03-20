@@ -132,12 +132,12 @@ class MLP:
 			print("Error: {} at epoch {}".format(sum_error / len(inputs), i))	
 	
 	def _mse(self, target, output):
-	#Mean Squared Error loss funciton
-	'''Args:
-		target,output>> ndarray >> The ground trut(?), the predicted values
-	Returns:
-		float>output
-	'''
+		#Mean Squared Error loss funciton
+		'''Args:
+			target,output>> ndarray >> The ground trut(?), the predicted values
+		Returns:
+			float>output
+		'''
 		return np.average((target - output)**2)
 	
 	def _sigmoid_derivative(self, x):
@@ -158,21 +158,23 @@ if __name__ == "__main__":
 	mlp = MLP(2, [5], 1)
 	
 	#train out mlp
-	mlp.train(inputs, targets, 50, 0.1)
+	mlp.train(inputs, targets, 500, 0.1)
 	
 	
 	
 	
 	#create dummy data
-	input = np.array([0.3, 0.1])
-	target = np.array([0.4])
-	
+	#input = np.array([0.3, 0.1])
+	input = np.array([0.1,0.1])
+	#target2 = np.array([0.4])
+	target = np.array([0.2])
 	output = mlp.forward_propagate(input)
+	#output2 = mlp.forward_propagate(input2)
 	print()
 	print()
 	print()
 	print("Our network believes that {} + {} equal to {}".format(input[0], input[1], output[0]))
-		
+	#print("Our network believes that {} + {} equal to {}".format(input2[0], input2[1], output2[0]))	
 	'''
 	#perform forward prop
 	output = mlp.forward_propagate(input)
