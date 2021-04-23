@@ -1,3 +1,10 @@
+#feature extraction for MLP and CNN are the not same. 
+#In CNN we think the audio like an grayscale image. 
+#So, to compare with others all the images have to be same shaped(height, width, channel).
+#To do so, we have to apply padding so that each audio file have same lengths.
+# At the end of this code a h5 file will be generated. Later on, we will use that h5 file for building and training our model
+
+
 import numpy as np
 import pandas as pd
 import librosa
@@ -5,8 +12,8 @@ import os
 from datetime import datetime
 
 max_pad_len = 174
-full_dataset_path = os.path.abspath('../UrbanSound8K/audio/')
-metadata = pd.read_csv('../UrbanSound8K/metadata/UrbanSound8K.csv')
+full_dataset_path = os.path.abspath('../../UrbanSound8K/audio/')
+metadata = pd.read_csv('../../UrbanSound8K/metadata/UrbanSound8K.csv')
 
 features = []
 
@@ -45,4 +52,4 @@ def extract_feature_all():
 if __name__ == '__main__':
 
 	df = extract_feature_all()
-	df.to_hdf('features_from_UrbanSound_for_cnn.h5', key='df',mode='w')
+	#df.to_hdf('features_from_UrbanSound_for_cnn.h5', key='df',mode='w')

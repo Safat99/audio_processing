@@ -1,3 +1,6 @@
+#this code is for applying tensorflow to make a model of MLP
+
+
 import numpy as np
 from random import random
 from sklearn.model_selection import train_test_split
