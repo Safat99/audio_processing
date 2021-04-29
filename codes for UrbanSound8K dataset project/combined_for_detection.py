@@ -96,11 +96,11 @@ if __name__ == '__main__':
 	########################################### GUI portion ###########
 		
 	r = Recorder()
-	switch = False
-	
+	load_switch = False
+	record_switch = False
 			
 	def load_sound():
-		global sound,sound_data,switch
+		global sound,sound_data,load_switch
 		for sound_display in frame.winfo_children():
 			sound_display.destroy()
 		
@@ -110,31 +110,46 @@ if __name__ == '__main__':
 		panel = tk.Label(frame, text = str(file_name[-1]).upper()).pack()
 		
 		#len(file_name)-1]
-		switch = True
-		print('switch',switch)
+		load_switch = True
+		print('load_switch',load_switch)
 	
 	
 	def play_loaded_sound():
 		try:
-			r.play(sound_data)
+			if load_switch==True:
+				r.play(sound_data)
+			else:
+				print("load_switch",load_switch)
 		except NameError:
-			pass
+			print("load hoy nai!!")
 
 
 
 	def record_audio():
-			r.record(5, output='temp.wav')
-			#switch = True
+			global record_switch
+			r.record(4, output='temp.wav')
+			record_switch = True
 			 
 	def play_recorded_sound():
-			#if switch == True:
-			r.play('temp.wav')
-			#else:
-			#	pass
+			if record_switch == True:
+				r.play('temp.wav')
+				#record_switch = False
+			else:
+				pass
 
 	def classify_sound():
-		pass
-
+		global load_switch, record_switch
+		if load_switch == True:
+			input_file = sound_data
+			record_switch = False
+			
+		if record_switch == True:
+			input_file = 'temp.wav'
+			load_switch = False
+			
+		result = prediction(input_file)
+		print(result)
+		msg = tk.Label(frame, text=result).pack()
 
 
 	gui = tk.Tk()
@@ -150,7 +165,7 @@ if __name__ == '__main__':
 	canvas = tk.Canvas(gui, height=500, width=500, bg='grey', bd=3)
 	canvas.pack(side = tk.TOP)
 
-	button_rec = tk.Button(canvas, text='Record Audio for 5 seconds', fg='white', bg= 'green', command = record_audio)
+	button_rec = tk.Button(canvas, text='Record Audio for 4 seconds', fg='white', bg= 'green', command = record_audio)
 	button_rec.pack(side=tk.TOP)
 
 	play_record_button = tk.Button(gui, text = 'Play Recorded Sound', fg = 'white', bg = 'black', command = play_recorded_sound).pack(side=tk.BOTTOM)
@@ -172,12 +187,12 @@ if __name__ == '__main__':
 	gui.mainloop()
 		
 	#############################################
-	if switch == True:
+	'''if switch == True:
 		print(99)
 		input_file = sound_data
 	#input_file = 'temp.wav'
 		result = prediction(input_file)
-		print(result)
+		print(result)'''
 	
 
 	

@@ -84,7 +84,7 @@ if __name__ == '__main__':
 	#load model
 	model = keras.models.load_model('../../cnn_model_after_training.h5')
 
-	input_file = 'gunshot.wav'
+	input_file = '../../gunshot.wav'
 	result = prediction(input_file)
 	print(result)
 	
